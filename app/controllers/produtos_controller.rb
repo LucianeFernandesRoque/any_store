@@ -4,17 +4,20 @@ class ProdutosController < ApplicationController
     @produtos_nome = Produto.order(:nome).limit 5
   end
 
+  def busca
+    nome = params[:nome]
+    @produtos = Produto.where 'nome like ?', "%#{nome}%"
+  end
+
   def create
     valores = params.require(:produto).permit :nome, :preco, :descricao, :quantidade
-    produto = Produto.create  valores
+    produto = Produto.create valores
     redirect_to root_url
-
   end
 
   def destroy
     id = params[:id]
     Produto.destroy id
     redirect_to root_url
-
   end
 end

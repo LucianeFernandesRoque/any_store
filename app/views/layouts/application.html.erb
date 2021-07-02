@@ -11,7 +11,14 @@
   </head>
 
   <body>
-  <%= nav_bar brand: "Any Store", brand_link: "/"%>
+  <%= nav_bar brand: "Any Store", brand_link: "/" do %>
+    <%= form_tag busca_produto_path, method: :get, class: "navbar-form navbar-right" do %>
+      <div class="form-group">
+        <%= text_field_tag :nome, @nome, class: "form-control" %>
+        <%= button_to "Buscar", nil, class: "btn btn-default"%>
+      </div>
+    <% end %>
+  <% end %>
   <div class="container">
     <%= yield %>
 </div>
